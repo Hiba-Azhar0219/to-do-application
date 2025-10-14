@@ -74,6 +74,8 @@ input {
   background-color: var(--secondaryBackground);
   border: 2px solid var(--purple);
   border-radius: 10px;
+  outline: none;
+  color: white;
 }
 button {
   width: 50px;
@@ -83,4 +85,7 @@ button {
   align-items: center;
   justify-content: center;
   background-color: var(--purple);
+  color: var(--text);
+  font-size: 30px;
+  font-weight: bold;
 }
