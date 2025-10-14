@@ -12,21 +12,25 @@ const addTask = () => {
 const updateTasksList = () => {
   const taskList = document.getElementById('taskList')
   taskList.innerHTML = ''
-  taskList.forEach((task) => {
+  taskList.forEach((task, index) => {
     const listItem = document.createElement('li')
     listItem.innerHTML = `
     <div class = "taskItem">
-    <div className="task">
-    <input type="checkbox" class="checkbox" />
-    <p>Finish this task</p>
+    <div class="task ${task.completed ? "completed":''}">
+    <input type="checkbox" class="checkbox" ${task.completed ? "checked" : ""}/>
+    <p>${task.text}</p>
     </div>
 
-    <div className="icons">
-    <img src = "./img/edit.png"/>
+    <div class="icons">
+    <img src = "./img/edit.png" />
     <img src = "./img/bin.png"/>
     </div>
     </div>
     `
+listItem.addEventListener('change', () =>toggleTaskComplete(index){
+
+})
+    taskList.append(listItem)
   })
 }
 
