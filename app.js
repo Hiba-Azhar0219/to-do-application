@@ -7,17 +7,20 @@ const addTask = () => {
   if (text) {
     tasks.push({ text: text, completed: false })
     updateTasksList()
+    updateStats()
   }
 }
 
 const toggleTaskComplete = (index) => {
   tasks[index].completed = !tasks[index].completed
   updateTasksList()
+  updateStats()
 }
 
 const deleteTask = (index) => {
   tasks.splice(index, 1)
   updateTasksList()
+  updateStats()
 }
 
 const editTask = (index) => {
@@ -25,6 +28,18 @@ const editTask = (index) => {
   taskInput.value = tasks[index].text
   tasks.splice(index, 1)
   updateTasksList()
+  updateStats()
+}
+
+const updateStats = () => {
+  const completeTasks = tasks.filter((task) => task.completed).length
+  const totalTasks = tasks.length
+  const progress = (completeTasks / totalTasks) * 100
+  const progressBar = document.getElementById('progress')
+  progressBar.style.widows = `${progress}%`
+  document.getElementById(
+    'numbers'
+  ).innerText = `${completeTasks} / ${totalTasks}`
 }
 
 const updateTasksList = () => {
