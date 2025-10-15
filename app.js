@@ -9,27 +9,43 @@ const addTask = () => {
     updateTasksList()
   }
 }
+
+const toggleTaskComplete = (index) => {
+  tasks[index].completed = !tasks[index].completed
+  updateTasksList()
+}
+
+const deleteTask = (index) => {
+  tasks.splice(index, 1)
+  updateTasksList()
+}
+
+const editTask = (index) => {
+  const taskInput = document.getElementById('taskInput')
+  taskInput.value = tasks[index].text
+  tasks.splice(index, 1)
+  updateTasksList()
+}
+
 const updateTasksList = () => {
   const taskList = document.getElementById('taskList')
   taskList.innerHTML = ''
-  taskList.forEach((task, index) => {
+  tasks.forEach((task, index) => {
     const listItem = document.createElement('li')
     listItem.innerHTML = `
     <div class = "taskItem">
-    <div class="task ${task.completed ? "completed":''}">
-    <input type="checkbox" class="checkbox" ${task.completed ? "checked" : ""}/>
+    <div class="task ${task.completed ? 'completed' : ''}">
+    <input type="checkbox" class="checkbox" ${task.completed ? 'checked' : ''}/>
     <p>${task.text}</p>
     </div>
 
     <div class="icons">
-    <img src = "./img/edit.png" />
-    <img src = "./img/bin.png"/>
+    <img src = "./img/edit.png" onClick="editTask(${index})" />
+    <img src = "./img/bin.png" onClick = "deleteTask(${index})"/>
     </div>
     </div>
     `
-listItem.addEventListener('change', () =>toggleTaskComplete(index){
-
-})
+    listItem.addEventListener('change', () => toggleTaskComplete(index))
     taskList.append(listItem)
   })
 }
